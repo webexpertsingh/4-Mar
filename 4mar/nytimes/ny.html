@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Stop: It's Giphy time</title>
+</head>
+<body>
+<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script type="text/javascript">
+var topArticles = [];
+var numbers = 5;
+var serachTerm = "Berlin wall";
+var startYear = "1990";
+var endYear = "1992";
+
+//https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=5cf4237d31a14547a9b06b216f406788&sort=newest&q=berlin+wall&begin_date=19900101&end_date=19920101
+	var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+	url += '?' + $.param({
+ 	'api-key': "5cf4237d31a14547a9b06b216f406788",
+ 	'sort': "newest",
+ 	'q': serachTerm,
+ 	'begin_date': startYear+'0101',
+ 	'end_date': endYear+'0101'
+	});
+	//console.log(url);
+	$.ajax({
+ 	url: url,
+ 	method: 'GET',
+	}).done(function(result) {
+		for(var i=0;i<numbers;i++){
+		console.log(result.response.docs[i]);
+	}
+	});
+</script>
+</body>
+</html>
